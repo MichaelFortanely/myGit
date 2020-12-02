@@ -1,0 +1,20 @@
+class Solution {
+    public int coinChange(int[] coins, int amount) {
+        int[] array = new int[amount + 1];
+        System.out.println(array.length);
+        Arrays.fill(array, amount + 1);
+        array[0] = 0;//what does the invalidation look like
+        for(int i = 1; i < array.length; i++){
+            //i need to to take each coin amount and substract that from the index i am already at and check and check if that is a value index => if it is then i add the answer from the previous index to 1 and make that the new answer in the new cell
+            for(int j = 0; j < coins.length; j++){
+                int x = i - coins[j]; // this is the value of the index minus the coin
+                if(x > -1){//you can go back and explore that index
+                    array[i] = Math.min(array[x] + 1, array[i]);
+                }
+            } //System.out.println(Arrays.toString(array));
+        } if(array[array.length - 1] > amount){
+            return -1;
+        }
+        return array[array.length - 1];
+    }
+}
